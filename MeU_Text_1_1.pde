@@ -1,26 +1,3 @@
-package processing.test.meu_text;
-
-import processing.core.*; 
-import processing.data.*; 
-import processing.event.*; 
-import processing.opengl.*; 
-
-import ketai.ui.*; 
-import android.content.Intent; 
-import android.os.Bundle; 
-import apwidgets.*; 
-
-import java.util.HashMap; 
-import java.util.ArrayList; 
-import java.io.File; 
-import java.io.BufferedReader; 
-import java.io.PrintWriter; 
-import java.io.InputStream; 
-import java.io.OutputStream; 
-import java.io.IOException; 
-
-public class MeU_Text extends PApplet {
-
 //////////////////////////////////////////////////////////////////////////
 //Filenames: MeU.pde
 //Authors: Robert Tu
@@ -72,13 +49,13 @@ public class MeU_Text extends PApplet {
 
 //import libraries
 
-
+import ketai.ui.*;
 //Ketai Sensor Library for Android: http://KetaiProject.org by Daniel Sauter
 
+import android.content.Intent;
+import android.os.Bundle;
 
-
-
-
+import apwidgets.*;
 //APwidgets library https://code.google.com/p/apwidgets/ by Rikard Lundstedt
 
 //BtSerial Copyright 2011, 2012 Andreas Goransson & David Cuartielles & Tom Igoe & Joshua Albers
@@ -151,7 +128,7 @@ final int Y_STATUS = 80;
 final int Y_LABEL = 810;
 
 
-public void setup()
+void setup()
 {   
   orientation(PORTRAIT);
   
@@ -209,7 +186,7 @@ public void setup()
 
 }
 
-public void draw() {
+void draw() {
   background(192, 241, 252);
   fill(0);
   text("Select a Message: ", X_LEFT, Y_LABEL);
@@ -224,7 +201,7 @@ public void draw() {
         fill(0);
         text("Message sent!", X_LEFT, Y_STATUS);
         if ((millis() - savedTime) > delayValue) {
-          bt.disconnect();
+          //bt.disconnect();
           SendFlag = false;
         }
         
@@ -248,11 +225,11 @@ public void draw() {
   
 }
   
-public void onClickWidget(APWidget widget){
+void onClickWidget(APWidget widget){
   
   if (widget == SendBtn) {
    
-    bt.connect(remoteAddress);
+    //bt.connect(remoteAddress);
     MessageToSend = "b" + selectedColour + InputField.getText() + '\r' + '\n';
     SendFlag = true;
     StartTimer();
@@ -261,7 +238,7 @@ public void onClickWidget(APWidget widget){
     deviceList = bt.list(true);
     selectionList = new KetaiList(this, deviceList); 
   } else if (widget == ClearBtn) {
-    bt.connect(remoteAddress);
+    //bt.connect(remoteAddress);
     MessageToSend = "b" + selectedColour + " " + '\r' + '\n';
     SendFlag = true;
     StartTimer();
@@ -293,7 +270,7 @@ public void onClickWidget(APWidget widget){
   
 }
 
-public void onKetaiListSelection(KetaiList kList) {
+void onKetaiListSelection(KetaiList kList) {
   //println(kList.getSelection());
   if (kList.getSelection().indexOf(":") != -1) {
     println(kList.getSelection());
@@ -304,6 +281,32 @@ public void onKetaiListSelection(KetaiList kList) {
     println(DeviceName);
     DeviceBtn.setText(DeviceName);
     
+    if(bt.isConnected() == true) {
+      bt.disconnect();
+      DeviceBtn.setText("No Device");
+    } else {
+      int Attempts = 0;
+      while (Attempts < 6) {
+        try {
+          bt.connect(remoteAddress);
+        } catch (Exception ex) {
+          println("Trying to connect...");
+        }
+        if (bt.isConnected() == true) {
+          println("Connected");
+          break;
+        } else {
+          Attempts++;
+        }
+      }
+      if (bt.isConnected() == false) {
+        fill(255,0,0);
+        text ("Cannot connect! Check if MeU is on.", X_LEFT, Y_STATUS);
+        DeviceBtn.setText("No Device");
+      }
+        
+    }
+    
   } else {
     selectedColour = colourList.get(kList.getSelection());
     SparkleBtn.setText(kList.getSelection());
@@ -311,7 +314,7 @@ public void onKetaiListSelection(KetaiList kList) {
     
 
 }
-public void saveText(int Index) {
+void saveText(int Index) {
   String[] TextToSave = new String[1]; 
   TextToSave[0] = InputField.getText();
   println("Text to save: " + TextToSave);
@@ -333,7 +336,7 @@ public void saveText(int Index) {
   }
   
 }
-public String loadText(int Index) {
+String loadText(int Index) {
   String Message = "";
   String FileName = " ";
   switch (Index) {
@@ -364,9 +367,7 @@ public String loadText(int Index) {
   
 }
 
-public void StartTimer() {
+void StartTimer() {
   savedTime = millis();
 }
 
-
-}

@@ -1,4 +1,4 @@
-package processing.test.meu_text;/**
+package processing.test.meu_text_1_1;/**
  * ##project.name##
  * ##library.sentence##
  *

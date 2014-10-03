@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="MeU_Text" default="help">
+<project name="MeU_Text_1_1" default="help">
   <property file="local.properties" />
   <property file="ant.properties" />
   <property environment="env" />

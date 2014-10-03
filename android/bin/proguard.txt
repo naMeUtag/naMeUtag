@@ -1,0 +1,3 @@
+# view AndroidManifest.xml #generated:1
+-keep class processing.test.meu_text_1_1.MeU_Text_1_1 { <init>(...); }
+
