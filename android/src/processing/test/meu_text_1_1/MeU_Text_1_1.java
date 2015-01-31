@@ -103,15 +103,16 @@ APButton SendBtn;
 APButton DeviceBtn;
 APButton ClearBtn;
 APButton SparkleBtn;
-APButton MessageBtn1;
-APButton MessageBtn2;
-APButton MessageBtn3;
-APButton MessageBtn4;
-APButton SaveBtn1;
-APButton SaveBtn2;
-APButton SaveBtn3;
-APButton SaveBtn4;
+//APButton MessageBtn1;
+//APButton MessageBtn2;
+//APButton MessageBtn3;
+//APButton MessageBtn4;
+//APButton SaveBtn1;
+//APButton SaveBtn2;
+//APButton SaveBtn3;
+//APButton SaveBtn4;
 APEditText InputField;
+APEditText InputField1;
 
 KetaiList selectionList;
 
@@ -126,29 +127,29 @@ int delayValue = 500;
 //constants for button width and sizes
 //these sizes should fit within Galaxy Note 3 resolution size
 
-final int INPUT_W = 910;
-final int INPUT_H = 135;
-final int CTRL_BTN_W = 400;
+final int INPUT_W = 1100;
+final int INPUT_H = 300;
+final int CTRL_BTN_W = 550;
 final int BTN_H = 175;
 final int MSG_BTN_W = 590;
-final int SAVE_BTN_W = 260;
+//final int SAVE_BTN_W = 260;
 
 //x y positions for buttons
-final int Y_INPUT = 170;
+final int Y_INPUT = 250;
 
-final int X_LEFT = 85;
+final int X_LEFT = 5;
 final int X_CMD = 590;
 final int X_SAVE = 725;
 
-final int Y_CMD_1 = 355;
-final int Y_CMD_2 = 575;
+final int Y_CMD_1 = 1500;
+final int Y_CMD_2 = 1050;
 final int Y_MSG_1 = 900;
 final int Y_MSG_2 = 1125;
 final int Y_MSG_3 = 1335;
 final int Y_MSG_4 = 1560;
 
 final int Y_STATUS = 80;
-final int Y_LABEL = 810;
+final int Y_LABEL = 200;
 
 
 public void setup()
@@ -172,36 +173,38 @@ public void setup()
   
   widgetContainer = new APWidgetContainer(this); //create new container for widgets
   
-  InputField = new APEditText(X_LEFT, Y_INPUT, INPUT_W, INPUT_H);
+  InputField = new APEditText(X_LEFT + 10, 375, INPUT_W, INPUT_H);
+  InputField1 = new APEditText(X_LEFT + 10, 960, INPUT_W, INPUT_H);
   
-  SendBtn = new APButton(X_LEFT, Y_CMD_1, CTRL_BTN_W, BTN_H, "Send");
-  DeviceBtn = new APButton(X_CMD, Y_CMD_1, CTRL_BTN_W, BTN_H, "Device");
-  ClearBtn = new APButton(X_LEFT, Y_CMD_2, CTRL_BTN_W, BTN_H, "Clear Disp");
+  SendBtn = new APButton(15, Y_CMD_1, CTRL_BTN_W * 2, BTN_H + 250, "Send");
+  DeviceBtn = new APButton(X_CMD, Y_CMD_1 - 220, CTRL_BTN_W, BTN_H, "Device");
+  ClearBtn = new APButton(15, Y_CMD_1 - 220, CTRL_BTN_W, BTN_H, "Clear Disp");
   SparkleBtn = new APButton(X_CMD, Y_CMD_2, CTRL_BTN_W, BTN_H, "Colour");
   
-  MessageBtn1 = new APButton (X_LEFT, Y_MSG_1, MSG_BTN_W, BTN_H, loadText(1));
-  MessageBtn2 = new APButton (X_LEFT, Y_MSG_2, MSG_BTN_W, BTN_H, loadText(2));
-  MessageBtn3 = new APButton (X_LEFT, Y_MSG_3, MSG_BTN_W, BTN_H, loadText(3));
-  MessageBtn4 = new APButton (X_LEFT, Y_MSG_4, MSG_BTN_W, BTN_H, loadText(4));
-  SaveBtn1 = new APButton(X_SAVE, Y_MSG_1, SAVE_BTN_W, BTN_H, "Save 1");
-  SaveBtn2 = new APButton(X_SAVE, Y_MSG_2, SAVE_BTN_W, BTN_H, "Save 2");
-  SaveBtn3 = new APButton(X_SAVE, Y_MSG_3, SAVE_BTN_W, BTN_H, "Save 3");
-  SaveBtn4 = new APButton(X_SAVE, Y_MSG_4, SAVE_BTN_W, BTN_H, "Save 4");
+  //MessageBtn1 = new APButton (X_LEFT, Y_MSG_1, MSG_BTN_W, BTN_H, loadText(1));
+  //MessageBtn2 = new APButton (X_LEFT, Y_MSG_2, MSG_BTN_W, BTN_H, loadText(2));
+  //MessageBtn3 = new APButton (X_LEFT, Y_MSG_3, MSG_BTN_W, BTN_H, loadText(3));
+  //MessageBtn4 = new APButton (X_LEFT, Y_MSG_4, MSG_BTN_W, BTN_H, loadText(4));
+  //SaveBtn1 = new APButton(X_SAVE, Y_MSG_1, SAVE_BTN_W, BTN_H, "Save 1");
+  //SaveBtn2 = new APButton(X_SAVE, Y_MSG_2, SAVE_BTN_W, BTN_H, "Save 2");
+  //SaveBtn3 = new APButton(X_SAVE, Y_MSG_3, SAVE_BTN_W, BTN_H, "Save 3");
+  //SaveBtn4 = new APButton(X_SAVE, Y_MSG_4, SAVE_BTN_W, BTN_H, "Save 4");
 
   widgetContainer.addWidget(InputField);
+  widgetContainer.addWidget(InputField1);
   widgetContainer.addWidget(SendBtn);
   widgetContainer.addWidget(DeviceBtn);
   widgetContainer.addWidget(ClearBtn);
-  widgetContainer.addWidget(SparkleBtn);
+  //widgetContainer.addWidget(SparkleBtn);
   
-  widgetContainer.addWidget(MessageBtn1);
-  widgetContainer.addWidget(MessageBtn2);
-  widgetContainer.addWidget(MessageBtn3);
-  widgetContainer.addWidget(MessageBtn4);
-  widgetContainer.addWidget(SaveBtn1);
-  widgetContainer.addWidget(SaveBtn2);
-  widgetContainer.addWidget(SaveBtn3);
-  widgetContainer.addWidget(SaveBtn4);
+  //widgetContainer.addWidget(MessageBtn1);
+  //widgetContainer.addWidget(MessageBtn2);
+  //widgetContainer.addWidget(MessageBtn3);
+  //widgetContainer.addWidget(MessageBtn4);
+  //widgetContainer.addWidget(SaveBtn1);
+  //widgetContainer.addWidget(SaveBtn2);
+  //widgetContainer.addWidget(SaveBtn3);
+  //widgetContainer.addWidget(SaveBtn4);
   
   //Load drop down list
   deviceList = bt.list(true); 
@@ -210,19 +213,25 @@ public void setup()
 }
 
 public void draw() {
-  background(192, 241, 252);
-  fill(0);
-  text("Select a Message: ", X_LEFT, Y_LABEL);
+  background(0, 0, 0);
+  fill(255,255,255);
+  textSize(420);
+  text("WHO", 45, 370);
+  fill(255,255,255);
+  textSize(380);
+  text("WHAT", 15, 955);
+
+  
   if (remoteAddress.equals("")){
-    fill(255, 0, 0);
-    text("Choose a MeU address.", X_LEFT, Y_STATUS);
+    //fill(255, 0, 0);
+    //text("Choose a MeU address.", X_LEFT, Y_STATUS);
   } else {
     if (SendFlag == true) {
       
       if(bt.isConnected() == true) {
         bt.write(MessageToSend);
-        fill(0);
-        text("Message sent!", X_LEFT, Y_STATUS);
+        //fill(0);
+        //text("Message sent!", X_LEFT, Y_STATUS);
         if ((millis() - savedTime) > delayValue) {
           //bt.disconnect();
           SendFlag = false;
@@ -231,18 +240,18 @@ public void draw() {
         
       } else {
         if ((millis() - savedTime) > delayValue) {
-          fill(255,0,0);
-          text ("Cannot connect! Check if MeU is on.", X_LEFT, Y_STATUS);
+          //fill(255,0,0);
+          //text ("Cannot connect! Check if MeU is on.", X_LEFT, Y_STATUS);
           
         } else {
-          fill(0);
-          text ("Sending...", X_LEFT, Y_STATUS);
+          //fill(0);
+          //text ("Sending...", X_LEFT, Y_STATUS);
           
         }
       }
     } else {
-      fill(0);
-      text("Type your message: ", X_LEFT, Y_STATUS);
+      //fill(0);
+      //text("Type your message: ", X_LEFT, Y_STATUS);
     }
   }
   
@@ -253,7 +262,7 @@ public void onClickWidget(APWidget widget){
   if (widget == SendBtn) {
    
     //bt.connect(remoteAddress);
-    MessageToSend = "b" + selectedColour + InputField.getText() + '\r' + '\n';
+    MessageToSend = "b" + "00FFFF" + "Hi I'm " + InputField.getText() + ',' + ' ' + InputField1.getText() + '\r' + '\n';
     SendFlag = true;
     StartTimer();
     
@@ -262,14 +271,14 @@ public void onClickWidget(APWidget widget){
     selectionList = new KetaiList(this, deviceList); 
   } else if (widget == ClearBtn) {
     //bt.connect(remoteAddress);
-    MessageToSend = "b" + selectedColour + " " + '\r' + '\n';
+    MessageToSend = "b" + "00FFFF" + " " + '\r' + '\n';
     SendFlag = true;
     StartTimer();
   
   } else if (widget == SparkleBtn) {
     selectionList = new KetaiList(this, colourList.keyArray());
     
-  } else if (widget == MessageBtn1) {
+  }/* else if (widget == MessageBtn1) {
     InputField.setText(loadText(1));
   } else if (widget == MessageBtn2) {
     InputField.setText(loadText(2));
@@ -277,7 +286,7 @@ public void onClickWidget(APWidget widget){
     InputField.setText(loadText(3));
   } else if (widget == MessageBtn4) {
     InputField.setText(loadText(4));
-  } else if (widget == SaveBtn1) {
+  }  else if (widget == SaveBtn1) {
     MessageBtn1.setText(InputField.getText());
     saveText(1);
   } else if (widget == SaveBtn2) {
@@ -289,7 +298,7 @@ public void onClickWidget(APWidget widget){
   } else if (widget == SaveBtn4) {
     MessageBtn4.setText(InputField.getText());
     saveText(4);
-  }
+  }*/
   
 }
 
@@ -337,6 +346,8 @@ public void onKetaiListSelection(KetaiList kList) {
     
 
 }
+
+/*
 public void saveText(int Index) {
   String[] TextToSave = new String[1]; 
   TextToSave[0] = InputField.getText();
@@ -358,7 +369,7 @@ public void saveText(int Index) {
       break;
   }
   
-}
+} 
 public String loadText(int Index) {
   String Message = "";
   String FileName = " ";
@@ -389,7 +400,7 @@ public String loadText(int Index) {
   return Message;
   
 }
-
+*/
 public void StartTimer() {
   savedTime = millis();
 }
