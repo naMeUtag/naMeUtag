@@ -21,71 +21,9 @@ import java.io.IOException;
 
 public class MeU_Text_1_1 extends PApplet {
 
-//////////////////////////////////////////////////////////////////////////
-//Filenames: MeU.pde
-//Authors: Robert Tu
-//Date Created: January 23, 2014
-//Notes:
-/*
-  
-  This is the Processing Android program that controls the MeU panel. It
-  utilizes the android processing library, ketai library for the selection, 
-  list, apwidgets for UI devices such as buttons and input boxes and Btserial
-  to communicate with the arduino bluetooth. 
-  
-  In the main loop the program waits for a serial message sent from a mobile
-  device via bluetooth. The message is then parsed for specific commands. 
-  
-  The message protocol is as follows:
-  
-  "bFFFFFFmessage\n\r"
-  
-  The first character is the mode command and will determine what kind of
-  information will be displayed on the LED panel. Due to memory limitations
-  of the Arduino Mini Pro, the only mode available is text display which is
-  initiated by prefixing each command with "b". If you are sending a command 
-  to the Arduino always prefix the message with "b".
-  
-  The next six characters are colour values in hex (RGB notation). The colour 
-  of the text is determined by this value.
-  
-  The rest of the following characters is the actual text to be displayed on 
-  the LED panel. 
-  
-  The \n\r characters are for the serial read andparsing function to determine 
-  the end of the message.
-  
-  For example if the Arduino receives the following command:
-  "bFF00FFHello there how are you?\n\r"
-  
-  MeU will display "Hello there how are you?" in magenta colour.
-  
-  PLEASE NOTE: The Arduino Mini only has 2K of SRAM and since the Adafruit library
-  uses much of that, any remaining dynamic variables must be used
-  very wisely.
-
-
-*/
-
-//////////////////////////////////////////////////////////////////////////
-
-
-//import libraries
-
-
-//Ketai Sensor Library for Android: http://KetaiProject.org by Daniel Sauter
-
-
-
-
-
-//APwidgets library https://code.google.com/p/apwidgets/ by Rikard Lundstedt
-
-//BtSerial Copyright 2011, 2012 Andreas Goransson & David Cuartielles & Tom Igoe & Joshua Albers
-//Version 0.2.0
-//August 2012
-//https://github.com/arduino/BtSerial
-
+//naMeUtag
+//Created by Kingsong Chen, Ross Semenov and Pranav Anand.
+	
 //selected bluetooth mac address to communicate with
 String remoteAddress = "";
 
@@ -103,14 +41,6 @@ APButton SendBtn;
 APButton DeviceBtn;
 APButton ClearBtn;
 APButton SparkleBtn;
-//APButton MessageBtn1;
-//APButton MessageBtn2;
-//APButton MessageBtn3;
-//APButton MessageBtn4;
-//APButton SaveBtn1;
-//APButton SaveBtn2;
-//APButton SaveBtn3;
-//APButton SaveBtn4;
 APEditText InputField;
 APEditText InputField1;
 
@@ -179,16 +109,7 @@ public void setup()
   SendBtn = new APButton(15, Y_CMD_1, CTRL_BTN_W * 2, BTN_H + 250, "Send");
   DeviceBtn = new APButton(X_CMD, Y_CMD_1 - 220, CTRL_BTN_W, BTN_H, "Device");
   ClearBtn = new APButton(15, Y_CMD_1 - 220, CTRL_BTN_W, BTN_H, "Clear Disp");
-  SparkleBtn = new APButton(X_CMD, Y_CMD_2, CTRL_BTN_W, BTN_H, "Colour");
-  
-  //MessageBtn1 = new APButton (X_LEFT, Y_MSG_1, MSG_BTN_W, BTN_H, loadText(1));
-  //MessageBtn2 = new APButton (X_LEFT, Y_MSG_2, MSG_BTN_W, BTN_H, loadText(2));
-  //MessageBtn3 = new APButton (X_LEFT, Y_MSG_3, MSG_BTN_W, BTN_H, loadText(3));
-  //MessageBtn4 = new APButton (X_LEFT, Y_MSG_4, MSG_BTN_W, BTN_H, loadText(4));
-  //SaveBtn1 = new APButton(X_SAVE, Y_MSG_1, SAVE_BTN_W, BTN_H, "Save 1");
-  //SaveBtn2 = new APButton(X_SAVE, Y_MSG_2, SAVE_BTN_W, BTN_H, "Save 2");
-  //SaveBtn3 = new APButton(X_SAVE, Y_MSG_3, SAVE_BTN_W, BTN_H, "Save 3");
-  //SaveBtn4 = new APButton(X_SAVE, Y_MSG_4, SAVE_BTN_W, BTN_H, "Save 4");
+  //SparkleBtn = new APButton(X_CMD, Y_CMD_2, CTRL_BTN_W, BTN_H, "Colour");
 
   widgetContainer.addWidget(InputField);
   widgetContainer.addWidget(InputField1);
@@ -196,15 +117,6 @@ public void setup()
   widgetContainer.addWidget(DeviceBtn);
   widgetContainer.addWidget(ClearBtn);
   //widgetContainer.addWidget(SparkleBtn);
-  
-  //widgetContainer.addWidget(MessageBtn1);
-  //widgetContainer.addWidget(MessageBtn2);
-  //widgetContainer.addWidget(MessageBtn3);
-  //widgetContainer.addWidget(MessageBtn4);
-  //widgetContainer.addWidget(SaveBtn1);
-  //widgetContainer.addWidget(SaveBtn2);
-  //widgetContainer.addWidget(SaveBtn3);
-  //widgetContainer.addWidget(SaveBtn4);
   
   //Load drop down list
   deviceList = bt.list(true); 
@@ -277,29 +189,7 @@ public void onClickWidget(APWidget widget){
   
   } else if (widget == SparkleBtn) {
     selectionList = new KetaiList(this, colourList.keyArray());
-    
-  }/* else if (widget == MessageBtn1) {
-    InputField.setText(loadText(1));
-  } else if (widget == MessageBtn2) {
-    InputField.setText(loadText(2));
-  } else if (widget == MessageBtn3) {
-    InputField.setText(loadText(3));
-  } else if (widget == MessageBtn4) {
-    InputField.setText(loadText(4));
-  }  else if (widget == SaveBtn1) {
-    MessageBtn1.setText(InputField.getText());
-    saveText(1);
-  } else if (widget == SaveBtn2) {
-    MessageBtn2.setText(InputField.getText());
-    saveText(2);
-  } else if (widget == SaveBtn3) {
-    MessageBtn3.setText(InputField.getText());
-    saveText(3);  
-  } else if (widget == SaveBtn4) {
-    MessageBtn4.setText(InputField.getText());
-    saveText(4);
-  }*/
-  
+  }
 }
 
 public void onKetaiListSelection(KetaiList kList) {
@@ -347,60 +237,6 @@ public void onKetaiListSelection(KetaiList kList) {
 
 }
 
-/*
-public void saveText(int Index) {
-  String[] TextToSave = new String[1]; 
-  TextToSave[0] = InputField.getText();
-  println("Text to save: " + TextToSave);
-  
-  switch (Index) {
-    
-    case 1:
-      saveStrings("\\sdcard\\message1.text", TextToSave);
-      break;
-    case 2:
-      saveStrings("\\sdcard\\message2.text", TextToSave);
-      break;
-    case 3:
-      saveStrings("\\sdcard\\message3.text", TextToSave);
-      break;
-    case 4:
-      saveStrings("\\sdcard\\message4.text", TextToSave);
-      break;
-  }
-  
-} 
-public String loadText(int Index) {
-  String Message = "";
-  String FileName = " ";
-  switch (Index) {
-    case 1:
-      FileName = "\\sdcard\\message1.text";
-      break;
-    case 2:
-      FileName = "\\sdcard\\message2.text";
-      break;
-    case 3:
-      FileName = "\\sdcard\\message3.text";
-      break;
-    case 4:
-      FileName = "\\sdcard\\message4.text";
-      break;
-    
-  }
-  try {
-    String[] value = loadStrings(FileName);
-    Message = value[0];
-  }
-  catch (NullPointerException e) {
-    println("file does not exist");
-    Message = " ";
-  }
-  
-  return Message;
-  
-}
-*/
 public void StartTimer() {
   savedTime = millis();
 }
